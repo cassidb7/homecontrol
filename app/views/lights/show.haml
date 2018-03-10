@@ -1,0 +1,21 @@
+=javascript_include_tag "light_request"
+- content_for :channels do
+  = javascript_include_tag 'channels/channels'
+%table.table
+  %thead
+    %th #
+    %th UID
+    %th Name
+    %th
+    %th Power
+  %tbody
+    = render partial: "light", locals: { light: @light, index: 1 }
+
+:javascript
+
+  $(".power-switch").bootstrapSwitch({
+   on: 'On',
+   off: 'Off',
+   onClass: 'success',
+   offClass: 'danger'
+  });

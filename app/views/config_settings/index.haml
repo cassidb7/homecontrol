@@ -1,0 +1,57 @@
+= link_to 'New', new_config_setting_path, class: 'btn btn-primary btn-lg model-new-top-button pull-right'
+
+- if @config_settings.blank?
+  %h3 No Config Settings
+- else
+  %ul#mainTab.nav.nav-tabs
+    %li.active
+      %a{href: '#tab1', data: { toggle: 'tab' } } Index
+  .tab-content
+    #tab1.tab-pane.active
+      %br
+
+      .row
+        %br
+        .col-md-12.text-center
+          -# = page_entries_info @activated_discounts, entry_name: 'Blanket Discounts'
+      %table#table-example.table.table-hover.no-footer{:role => "grid"}
+        %thead
+          %tr{role: "row"}
+            %th Title
+            %th Setting
+            %th
+        %tbody
+          - @config_settings.each do |config_setting|
+            .row
+              %tr.odd{role: "row"}
+                %td= config_setting.title
+                %td= config_setting.setting
+
+                -# %td
+                -#   = link_to client_blanket_discount_path(id: blanket_discount.id), title: "View"  do
+                -#     %span.fa-stack
+                -#       %i.fa.fa-square.fa-stack-2x
+                -#       %i.fa.fa-eye.fa-stack-1x.fa-inverse
+                -#   - unless !current_role.has_capability?('blanketDiscounts_edit')
+                -#     = link_to edit_client_blanket_discount_path(id: blanket_discount.id), title: "Edit" do
+                -#       %span.fa-stack
+                -#         %i.fa.fa-square.fa-stack-2x
+                -#         %i.fa.fa-pencil.fa-stack-1x.fa-inverse
+                -#
+                -#   - if is_active
+                -#     - unless !current_role.has_capability?('blanketDiscounts_mark_as_deleted')
+                -#       = link_to client_blanket_discount_path(id: blanket_discount.id), title: "Delete", method: :delete  do
+                -#         %span.fa-stack
+                -#           %i.fa.fa-square.fa-stack-2x
+                -#           %i.fa.fa-trash.fa-stack-1x.fa-inverse
+                -#   -else
+                -#     - unless !current_role.has_capability?('blanketDiscounts_reinstate')
+                -#       = link_to reinstate_client_blanket_discount_path(id: blanket_discount.id), title: "Delete", method: :patch  do
+                -#         %span.fa-stack
+                -#           %i.fa.fa-square.fa-stack-2x
+                -#           %i.fa.fa-refresh.fa-stack-1x.fa-inverse
+
+
+
+      %div.pull-right
+        -# = paginate(@activated_discounts)

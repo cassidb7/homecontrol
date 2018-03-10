@@ -1,0 +1,26 @@
+.row
+  .col-3
+  .col-6.well
+    = form_for @attachment, url: attachments_path, id: 'uploader', html: { multipart: true, class: 'form-horizontal' } do |f|
+      .text-center
+        .form-group
+          .col-3
+            = f.text_field :device_type, class: 'form_control'
+          .col-3
+            = f.file_field :image, required: true
+        .control-group
+          .controls
+            %span
+              %strong Upload
+        .form-actions
+          %br
+          = f.submit 'Upload', class: 'btn btn-primary'
+          = link_to 'Cancel', root_path, class: 'btn btn-default'
+
+
+:javascript
+  $(function() {
+    $('#uploader').on('change', function() {
+      $('form').valid();
+    });
+  });

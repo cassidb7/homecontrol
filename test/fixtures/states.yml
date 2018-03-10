@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  on_state: MyString
+  brightness_state: 1
+  hue_state: 1
+  saturation_state: 1
+  effect: MyString
+  x_state: 9.99
+  y_state: 9.99
+  ct_state: 1
+  alert: MyString
+
+two:
+  on_state: MyString
+  brightness_state: 1
+  hue_state: 1
+  saturation_state: 1
+  effect: MyString
+  x_state: 9.99
+  y_state: 9.99
+  ct_state: 1
+  alert: MyString
