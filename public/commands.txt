@@ -1,0 +1,74 @@
+convert /Users/tracefirst/Desktop/homecontrol/public/jag.jpg -threshold 50% -bordercolor white -border 10 -fill black -draw "color 0,0 floodfill" -alpha off -shave 10x10 /Users/tracefirst/Desktop/homecontrol/public/output_reg1-2.gif
+
+
+convert /Users/tracefirst/Desktop/homecontrol/public/output_reg1-2.gif -define connected-components:verbose=true -connected-components 4 /Users/tracefirst/Desktop/homecontrol/public/405_B_objects.png
+
+
+convert /Users/tracefirst/Desktop/homecontrol/public/405_B_objects.png -define connected-components:verbose=true -connected-components 4 /Users/tracefirst/Desktop/homecontrol/public/output_reg1-21.tiff
+
+
+
+
+convert /Users/tracefirst/Desktop/homecontrol/public/405_B_objects.png -define connected-components:area-threshold=12119 -connected-components 4 -auto-level -morphology erode octagon:1 /Users/tracefirst/Desktop/homecontrol/public/405_B_objects_ccl.png
+
+
+convert /Users/tracefirst/Desktop/homecontrol/public/jag.jpg /Users/tracefirst/Desktop/homecontrol/public/405_B_objects_ccl.png -alpha off -compose copy_opacity -composite -trim +repage -background white -alpha background -alpha off /Users/tracefirst/Desktop/homecontrol/public/405_B_result.gif
+
+
+
+Tesseract /Users/tracefirst/Desktop/homecontrol/public/405_B_result.gif /Users/tracefirst/Desktop/homecontrol/public/result 
+
+
+
+
+#####
+
+
+
+
+
+convert -crop 1024x200+0+270 
+/Users/tracefirst/Desktop/homecontrol/public/test_reg.jpg 
+/Users/tracefirst/Desktop/homecontrol/public/output_reg.tiff
+
+
+# crops the image to the height of the reg
+convert -crop 1024x200+0+270  /Users/tracefirst/Desktop/homecontrol/public/bmw.jpg /Users/tracefirst/Desktop/homecontrol/public/cropped_image.jpg
+
+
+
+# converts the reg to an input of black and white
+convert /Users/tracefirst/Desktop/homecontrol/public/output_reg.tiff -auto-level -colorspace gray -fuzz 20% -fill white +opaque "gray(80)" -fill black +opaque white /Users/tracefirst/Desktop/homecontrol/public/output_reg1.tiff
+
+
+
+
+# blury but heavy black reg letters
+convert /Users/tracefirst/Desktop/homecontrol/public/output_reg.tiff -auto-level -colorspace gray -fuzz 50% -fill green +opaque "gray(80)" -fill black +opaque white /Users/tracefirst/Desktop/homecontrol/public/output_reg1.tiff
+
+
+convert /Users/tracefirst/Desktop/homecontrol/public/output_reg.tiff -auto-level -colorspace gray -fuzz 60% -fill white +opaque "gray(80)" -fill white +opaque black /Users/tracefirst/Desktop/homecontrol/public/output_reg1.tiff
+
+
+
+
+# this is to try get the text off the white background
+
+convert /Users/tracefirst/Desktop/homecontrol/public/output_reg1.tiff -threshold 50% -bordercolor white -border 10 -fill black -draw "color 0,0 floodfill" -alpha off -shave 10x10 /Users/tracefirst/Desktop/homecontrol/public/output_reg1-2.tiff
+
+
+convert /Users/tracefirst/Desktop/homecontrol/public/output_reg1-2.tiff -define connected-components:verbose=true -connected-components 4 /Users/tracefirst/Desktop/homecontrol/public/output_reg1-21.tiff
+
+
+
+convert 405_B_objects.png -define connected-components:area-threshold=12119 -connected-components 4 -auto-level -morphology erode octagon:1 405_B_objects_ccl.png
+
+
+
+
+
+
+
+
+Tesseract /Users/tracefirst/Desktop/homecontrol/public/output_reg1.tiff /Users/tracefirst/Desktop/homecontrol/public/result 
+

@@ -24,56 +24,98 @@ class AttachmentsController < ApplicationController
    end
 
    def read_plate
-     path = Rails.root.join("public/test_reg.jpg")
+     path = Rails.root.join("public/registration_processing/jag.jpg")
      path if File.exists?(path)
-
-
 
      file = File.open(path, 'rb')
 
-
-
-
-
      geometry = `identify -format "%w:%h" #{path}`
 
-     puts geometry
+     width  = geometry.split(':')[0].to_i
+     height = geometry.split(':')[1].to_i
+     
 
-     # width  = geometry.split(':')[0].to_i
-     # height = geometry.split(':')[1].to_i
-     #
-     # cmd = "convert "
-     # cmd += "-crop #{width}x#{(height * 0.2).round}+0+0 "
-     # cmd += "#{file} "
-     # system cmd
-
-
-
-
+     cmd = "convert "
+     cmd += "-crop #{width}x#{height}+0+#{(height - (height/3)).round} "
+     cmd += "#{path} "
+     cmd += "#{Rails.root.join("public/registration_processing/cropped_output.jpg")}"
+     
+     cropped_output = Rails.root.join("public/registration_processing/cropped_output.jpg")
+     system cmd
 
 
+     # convert the image to black and white
+    cmd = "convert "
+    cmd += "#{cropped_output} "
+    cmd += '-threshold 50% -bordercolor white -border 10 -fill black -draw "color 0,0 floodfill" -alpha off -shave 10x10 '
+    cmd += "#{Rails.root.join("public/registration_processing/binary_output.gif")}"
+    
+    binary_output = "#{Rails.root.join("public/registration_processing/binary_output.gif")}"
+    system cmd
+    
+    
+    # split image into layers to find most white background area
+    cmd = "convert "
+    cmd += "#{binary_output} "
+    cmd += '-define connected-components:verbose=true -connected-components 4 '
+    cmd += "#{Rails.root.join("public/registration_processing/layered_output.png")}"
+    
+    layered_output = "#{Rails.root.join("public/registration_processing/layered_output.png")}"
+    puts cmd
+    system cmd
 
 
 
 
 
+    # target the layer with the largest white background
+    cmd = "convert "
+    cmd += "#{layered_output} "
+    cmd += '-define connected-components:area-threshold=12119 -connected-components 4 -auto-level -morphology erode octagon:1 '
+    cmd += "#{Rails.root.join("public/registration_processing/targeted_output.png")}"
+    
+    targeted_output = "#{Rails.root.join("public/registration_processing/targeted_output.png")}"
+    puts cmd
+    system cmd
 
 
 
-     # cmd = "tesseract #{path} test1 segdemo inter"
+    # target the layer with the largest white background
+    cmd = "convert "
+    cmd += "#{cropped_output} "
+    cmd += "#{targeted_output} "
+    cmd += '-alpha off -compose copy_opacity -composite -trim +repage -background white -alpha background -alpha off '
+    cmd += "#{Rails.root.join("public/registration_processing/cleansed_output.gif")}"    
+    cleansed_output = "#{Rails.root.join("public/registration_processing/cleansed_output.gif")}"
+    
+    puts cmd
+    system cmd
+    
+    # convert to tiff for ocr
+    cmd = "convert #{cleansed_output} "
+    cmd += "#{Rails.root.join("public/registration_processing/ocr_output.tiff")}"
+    ocr_output = "#{Rails.root.join("public/registration_processing/ocr_output.tiff")}"
 
-    # convert_to_tiff = "convert -density 300 -depth 8 -strip -background white -alpha off -auto-level -auto-gamma -compress none #{path} #{Rails.root.join("public/output.tiff")}"
-    # system convert_to_tiff
+    puts cmd
+    system cmd
 
 
 
+    cmd = "convert #{ocr_output} -colorspace gray -threshold 30% " 
+    cmd += "#{Rails.root.join("public/registration_processing/complete_output.tiff")}"
+    complete_output = "#{Rails.root.join("public/registration_processing/complete_output.tiff")}"
+    system cmd
 
-   # ocr = "tesseract #{Rails.root.join("public/output.tiff")} stdout"
-   # reg_number = ocr[0..4000]
-   #
-   #   system convert_to_tiff
-   #
-   #   puts reg_number
+
+    cmd = "tesseract #{complete_output} "
+    cmd += "#{Rails.root.join("public/registration_processing/complete_output")} "
+    system cmd
+    
+    cmd = "tesseract #{ocr_output} "
+    cmd += "#{Rails.root.join("public/registration_processing/ocr_output")} "
+    system cmd
+
+
 
 
 
