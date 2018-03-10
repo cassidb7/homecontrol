@@ -4,7 +4,9 @@ Rails.application.routes.draw do
 
   root to: "lights#index"
 
-  resources :attachments, only: [:show, :new, :create]
+  resources :attachments, only: [:show, :new, :create] do
+    get :read_plate, on: :collection
+  end
 
   resources :config_settings
 
