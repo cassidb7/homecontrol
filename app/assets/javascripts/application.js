@@ -14,7 +14,6 @@
 //= require turbolinks
 //= require jquery3
 //= require jquery_ujs
-//= require bootstrap.min.js
-//= require bootstrap-switch.js
+// = require bootstrap2-toggle.min.js
 //= require jquery.knob.min.js
 //= require_tree .

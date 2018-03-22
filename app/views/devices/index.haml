@@ -1,7 +1,7 @@
-= link_to 'New', new_config_setting_path, class: 'btn btn-primary btn-lg model-new-top-button pull-right'
+= link_to 'New', new_device_path, class: 'btn btn-primary btn-lg model-new-top-button pull-right'
 
-- if @config_settings.blank?
-  %h3 No Config Settings
+- if @devices.blank?
+  %h3 No Devices
 - else
   %ul#mainTab.nav.nav-tabs
     %li.active
@@ -18,14 +18,15 @@
         %thead
           %tr{role: "row"}
             %th Title
-            %th Setting
+            %th IP Address
             %th
         %tbody
-          - @config_settings.each do |config_setting|
+          - @devices.each do |device|
             .row
               %tr.odd{role: "row"}
-                %td= config_setting.title
-                %td= config_setting.setting
+                %td= device.name
+                %td= device.ip_address
+
 
       %div.pull-right
         -# = paginate(@activated_discounts)

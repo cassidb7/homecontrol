@@ -1,4 +1,3 @@
-=javascript_include_tag "light_request"
 -# .row
 -#   .col-sm-3
 -#     = link_to "Get hue info", find_hue_lights_path, class:"btn btn-primary"
@@ -9,11 +8,8 @@
 -#   .col-sm-3
 -#     = link_to "Turn on light", turn_on_lights_path, class:"btn btn-primary"
 
-
 %table.table
   %thead
-    %th #
-    %th UID
     %th Name
     %th
     %th Power
@@ -21,11 +17,4 @@
     -@lights.each_with_index do |light, index|
       = render partial: "light", locals: { light: light, index: index }
 
-:javascript
-
-  $(".power-switch").bootstrapSwitch({
-   on: 'On',
-   off: 'Off',
-   onClass: 'success',
-   offClass: 'danger'
-  });
+=javascript_include_tag "light_request"

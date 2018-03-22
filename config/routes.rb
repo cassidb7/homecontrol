@@ -9,10 +9,24 @@ Rails.application.routes.draw do
   end
 
   resources :config_settings
+  resources :devices
 
   resources :lights, only: [:index, :show] do
     get :find_hue, :get_all_lights_info, on: :collection
     patch :turn_off, :turn_on, :dim_settings, on: :collection
   end
+
+
+  #api
+  namespace :api do
+    namespace :v1 do
+      resources :devices, only: [:index, :create, :show, :update, :destroy]
+      resources :peripherals do
+        get :handshake, on: :collection
+      end
+    end
+  end
+
+   mount ActionCable.server, at: '/cable'
 
 end

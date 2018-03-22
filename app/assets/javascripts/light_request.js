@@ -1,4 +1,11 @@
-$(function () {
+$(".power-switch").bootstrapSwitch({
+ on: 'On',
+ off: 'Off',
+ onClass: 'success',
+ offClass: 'danger'
+});
+
+
   $(".dial").knob({
      "min":0,
      "max":255,
@@ -10,11 +17,9 @@ $(function () {
        }
    });
 
-
-  $(".power-switch").change(function() {
+$(".power-switch").change(function() {
    if ($(this).is(':checked')) {
      lightsOn($(this));
-
 
    }else{
      lightsOff($(this));
@@ -23,7 +28,6 @@ $(function () {
   });
 
   function disableDial(){
-    console.log("diable knob")
     $('.dial').unwrap().attr("data-readOnly",true)
   }
 
@@ -37,7 +41,7 @@ $(function () {
    }
 
   function lightsOff(element){
-   var thisLightID = $(element).closest('tr').find('td:first').text();
+   var thisLightID = $(element).data('uniqueid');
 
    $.ajax({
      url: '/lights/turn_off.json',
@@ -51,7 +55,7 @@ $(function () {
    }
 
    function lightsOn(element){
-     var thisLightID = $(element).closest('tr').find('td:first').text();
+     var thisLightID = $(element).data('uniqueid');
 
      $.ajax({
        url: '/lights/turn_on.json',
@@ -63,4 +67,3 @@ $(function () {
        console.log("lights on")
      });
    }
-})

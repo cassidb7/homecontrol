@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_03_22_185028) do
+ActiveRecord::Schema.define(version: 2018_03_05_192701) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,14 +18,6 @@ ActiveRecord::Schema.define(version: 2018_03_22_185028) do
   create_table "config_settings", force: :cascade do |t|
     t.string "title"
     t.string "setting"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "devices", force: :cascade do |t|
-    t.string "device_uid"
-    t.string "ip_address"
-    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -23,18 +23,20 @@ class LightsController < ApplicationController
 
   def turn_off
     request_body = '{"on":false}'
-    Light.send_request_to_light(request_body, params[:uniqueid])
+    Light.send_request_to_light(request_body, params[:uniqueid], false)
 
     respond_to do |format|
+      ActionCable.server.broadcast 'notification_channel', content: "false"
       format.json  { render json: true, status: 200 }
     end
   end
 
   def turn_on
     request_body = '{"on":true}'
-    Light.send_request_to_light(request_body, params[:uniqueid])
+    Light.send_request_to_light(request_body, params[:uniqueid], true)
 
     respond_to do |format|
+      ActionCable.server.broadcast 'notification_channel', content: "true"
       format.json  { render json: true, status: 200 }
     end
   end

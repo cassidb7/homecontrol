@@ -38,10 +38,7 @@ class Light < ApplicationRecord
     lights = Light.send_request
 
     lights.each do |light|
-      puts "set_all_lights_state"
       this_light = Light.where( uniqueid: light[1]['uniqueid'] )
-      puts this_light.inspect
-      puts "should update this #{this_light.blank?}"
       next if this_light.blank?
       puts "should update this passed"
       this_light.first.state.update(on_state: light[1]['state']['on'])
@@ -62,24 +59,27 @@ class Light < ApplicationRecord
     return response
   end
 
-  def self.send_request_to_light(request_body, light_unique_id)
+  def self.send_request_to_light(request_body, light_unique_id, light_status)
     bridge_ip = ConfigSetting.retrieve('bridge_ip')
     bridge_identity = ConfigSetting.retrieve('user_identifier')
 
-    light = Light.by_uniqueid(light_unique_id).first
+    light = Light.by_light_identifier(light_unique_id)
+
 
     url = URI("http://" + bridge_ip + "/api/" + bridge_identity + "/lights/" + light.light_identifier.to_s + "/state")
 
     http = Net::HTTP.new(url.host, url.port)
 
+
+
     request = Net::HTTP::Put.new(url)
     request["content-type"] = 'application/json'
     request.body = request_body
 
-    PowerToggleJob
 
     response = http.request(request)
 
+    light.state.update_attributes( on_state: light_status )
     return response
   end
 
@@ -107,7 +107,7 @@ class Light < ApplicationRecord
   end
 
   def light_boolean
-    return self.on_state == "t" ?  true : false
+    return self.state.on_state == "t" ?  true : false
   end
 
 end

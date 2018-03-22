@@ -1,8 +1,6 @@
 %tr
-  %th= index + 1
-  %td= light.uniqueid
   %td= light.name
   %td
     %input.dial{type: "text", value: light.state.brightness_state, data:{uniqueid: light.light_identifier}}
   %td
-    = check_box_tag 'catalog_image', 1, light.light_boolean, class: 'power-switch'
+    = check_box_tag 'light_setting', 1, light.light_boolean, class: 'power-switch', data:{ uniqueid: light.light_identifier }
