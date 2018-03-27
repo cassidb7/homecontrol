@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     patch :turn_off, :turn_on, :dim_settings, on: :collection
   end
 
+resources :registrations
 
   #api
   namespace :api do
@@ -23,6 +24,7 @@ Rails.application.routes.draw do
       resources :devices, only: [:index, :create, :show, :update, :destroy]
       resources :peripherals do
         get :handshake, on: :collection
+        post :handshake_post, on: :collection
       end
     end
   end

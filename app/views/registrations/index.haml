@@ -1,0 +1,28 @@
+= link_to 'New', new_registration_path, class: 'btn btn-primary btn-lg model-new-top-button pull-right'
+
+- if @registrations.blank?
+  %h3 No Registrations
+- else
+  %ul#tabs.nav.nav-tabs
+    %li.active
+      %a{href: '#tab1', data: { toggle: 'tab' } } Registrations
+  .tab-content
+    #tab1.tab-pane.active
+      %br
+
+      .row
+        %br
+        .col-md-12.text-center
+
+      %table#table-example.table.table-hover.no-footer{:role => "grid"}
+        %thead
+          %tr{role: "row"}
+            %th Title
+            %th Setting
+            %th
+        %tbody
+          - @registrations.each do |registration|
+            .row
+              %tr.odd{role: "row"}
+                %td= registration.owner
+                %td= registration.number
