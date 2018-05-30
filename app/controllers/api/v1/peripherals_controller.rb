@@ -14,7 +14,7 @@ class Api::V1::PeripheralsController < Api::V1::BaseController
 
     whitelisted = Attachment.process_image(path)
 
-    if whitlisted
+    if whitelisted
       # Attachment.green_light
       puts "koala true"
     else
