@@ -12,7 +12,16 @@ class Api::V1::PeripheralsController < Api::V1::BaseController
 
     path = params[:image].path
 
-    Attachment.process_image(path)
+    whitelisted = Attachment.process_image(path)
+
+    if whitlisted
+      # Attachment.green_light
+      puts "koala true"
+    else
+      # Attachment.red_light
+      puts "koala false"
+    end
+
   end
 
 private

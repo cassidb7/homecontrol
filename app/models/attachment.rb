@@ -67,7 +67,7 @@ class Attachment < ApplicationRecord
     cmd += "#{Rails.root.join("public/registration_processing/complete_output")} "
     system cmd
 
-    Attachment.cleanse_reg_number
+   Attachment.cleanse_reg_number
 
   end
 
@@ -78,10 +78,7 @@ class Attachment < ApplicationRecord
     reg.gsub!(/\-/, "")
     reg.gsub!(/\s/, "")
 
-
     registrations = Registration.by_length(reg.length)
-
-
 
     registrations.each_with_index do |registration, index|
       loop_counter = 0
@@ -95,8 +92,9 @@ class Attachment < ApplicationRecord
       break if percentage_equal.length == reg.length
     end
 
-    return reg
+    is_equal = percentage_equal.length == reg.length ? true : false
 
+    return is_equal
   end
 
 
