@@ -1,7 +1,5 @@
 class Attachment < ApplicationRecord
 
-
-
   def self.process_image(path)
     file  = File.open(path)
     geometry = `identify -format "%w:%h" #{path}`
@@ -79,11 +77,11 @@ class Attachment < ApplicationRecord
     reg.gsub!(/\s/, "")
 
     registrations = Registration.by_length(reg.length)
-	
+
     percentage_equal = []
     registrations.each_with_index do |registration, index|
       loop_counter = 0
-      #percentage_equal = []
+      # percentage_equal = []
       registration.number.split("").each do |r|
         percentage_equal << r if r == reg[loop_counter]
         loop_counter += 1
@@ -94,7 +92,6 @@ class Attachment < ApplicationRecord
     end
 
     is_equal = percentage_equal.length == reg.length ? true : false
-
     return is_equal
   end
 
