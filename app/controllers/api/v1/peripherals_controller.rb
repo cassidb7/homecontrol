@@ -21,7 +21,10 @@ class Api::V1::PeripheralsController < Api::V1::BaseController
       # Attachment.red_light
       puts "koala false"
     end
+  end
 
+  def grant_access
+    @device.open_gate
   end
 
 private
