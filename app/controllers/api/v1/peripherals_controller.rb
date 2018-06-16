@@ -25,6 +25,8 @@ class Api::V1::PeripheralsController < Api::V1::BaseController
 
   def grant_access
     @device.open_gate
+
+    render status: 200
   end
 
 private
