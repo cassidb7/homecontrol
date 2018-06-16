@@ -23,7 +23,7 @@ resources :registrations
     namespace :v1 do
       resources :devices, only: [:index, :create, :show, :update, :destroy]
       resources :peripherals do
-        get :handshake, on: :collection
+        get :handshake, :grant_access, on: :collection
         post :handshake_post, on: :collection
       end
     end
