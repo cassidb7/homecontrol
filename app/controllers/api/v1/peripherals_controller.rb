@@ -24,9 +24,9 @@ class Api::V1::PeripheralsController < Api::V1::BaseController
   end
 
   def grant_access
-    @device.open_gate
+    Device.open_gate
 
-    render status: 200
+    render json: {message: "request sent"}, status: 200
   end
 
 private

@@ -5,7 +5,7 @@ class Device < ApplicationRecord
 
   scope :find_by_ip_address, ->(ip_address) { where(ip_address: ip_address).first }
 
-  def open_gate
+  def self.open_gate
     pin_out = 17  # LED
 
     RPi::GPIO.set_numbering(:bcm)
