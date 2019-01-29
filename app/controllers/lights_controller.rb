@@ -1,8 +1,25 @@
 class LightsController < ApplicationController
 
   def index
-    Light.set_all_lights_state
+    redirect_to register_bridge_lights_path if bridge_registered?
+    # Light.set_all_lights_state
     @lights = Light.all
+  end
+
+  def register_bridge
+  end
+
+  def save_bridge_info
+    ip_address = params[:bridge_ip]
+
+    if ConfigSetting.retrieve('bridge_ip').blank?
+      ConfigSetting.create(title: 'bridge_ip', setting: ip_address)
+      service_response = BridgeAuthenticateService.new(bridge_ip: ip_address).run
+
+      render json: {type: service_response[0], message: service_response[1]}, status: 200
+    else
+      render json: {message: "Bridge IP address already registered"}, status: 200
+    end
   end
 
   def show
@@ -51,5 +68,15 @@ class LightsController < ApplicationController
     respond_to do |format|
       format.json  { render json: true, status: 200 }
     end
+  end
+
+  private
+
+  def bridge_registered?
+    bridge_ip = ConfigSetting.retrieve('bridge_ip', "")
+    bridge_identity = ConfigSetting.retrieve('user_identifier', "")
+
+    return true if bridge_identity.blank? || bridge_ip.blank?
+    false
   end
 end

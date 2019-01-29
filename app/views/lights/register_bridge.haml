@@ -1,0 +1,64 @@
+.col-md-12
+  #information-heading
+    %h3 Unable to find philips hue bridge
+    %h3 Follow the below steps to register you bridge
+  #actionable-container
+    #form-spacing
+      = form_tag(register_bridge_lights_path, {class: 'form-inline'}) do
+        = label_tag(:hue_bridge_ip, "Enter Hue Bridge IP Address")
+        #form-spacing
+          #bridge-ip-input.form-control
+          .btn.btn-primary.bridge-submission
+            Add
+
+:javascript
+  $( document ).ready(function() {
+    $('#bridge-ip-input').ipInput();
+  });
+
+  $(document).on('click', '.bridge-submission', function(e){
+    var ipInput = $('#bridge-ip-input').getIp()
+
+    if (ipInput != undefined){
+      // Ajax call to return a list of tests based on selected lab
+      $.ajax({
+        url: "/lights/save_bridge_info.json",
+        type: 'POST',
+        data: {
+          bridge_ip: ipInput,
+        }
+      }).done( function(data) {
+        alert(data.message)
+      });
+    }else{
+      alert("Ip cannot be blank")
+    }
+
+  })
+
+:css
+  .ip-input-container {
+    border: none;
+    background-color: none;
+  }
+
+  .ip-input-container .ip-input-item {
+    border: none;
+    outline: 0;
+    margin: 0;
+    width: 60px;
+    text-align: center;
+    vertical-align: bottom;
+    font-size: 13px;
+    background-color:none;
+  }
+
+  .ip-input-container .ip-input-dot {
+    display: inline-block;
+    width: 2px;
+    height: 2px;
+    margin-bottom: 2px;
+    background-color: #333;
+    border-radius: 50%;
+    vertical-align: bottom;
+  }

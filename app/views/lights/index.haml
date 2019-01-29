@@ -1,12 +1,12 @@
--# .row
--#   .col-sm-3
--#     = link_to "Get hue info", find_hue_lights_path, class:"btn btn-primary"
--#   .col-sm-3
--#     = link_to "Get All Lights Info", get_all_lights_info_lights_path, class:"btn btn-primary"
--#   .col-sm-3
--#     = link_to "Turn off light", turn_off_lights_path, class:"btn btn-primary"
--#   .col-sm-3
--#     = link_to "Turn on light", turn_on_lights_path, class:"btn btn-primary"
+.row
+  .col-sm-3
+    = link_to "Get hue info", find_hue_lights_path, class:"btn btn-primary"
+  .col-sm-3
+    = link_to "Get All Lights Info", get_all_lights_info_lights_path, class:"btn btn-primary"
+  .col-sm-3
+    = link_to "Turn off light", turn_off_lights_path, class:"btn btn-primary"
+  .col-sm-3
+    = link_to "Turn on light", turn_on_lights_path, class:"btn btn-primary"
 
 %table.table
   %thead
@@ -14,7 +14,8 @@
     %th
     %th Power
   %tbody
-    -@lights.each_with_index do |light, index|
-      = render partial: "light", locals: { light: light, index: index }
+    - unless @lights.nil?
+      -@lights.each_with_index do |light, index|
+        = render partial: "light", locals: { light: light, index: index }
 
 =javascript_include_tag "light_request"

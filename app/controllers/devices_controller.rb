@@ -44,6 +44,12 @@ class DevicesController < ApplicationController
     @device.destroy
   end
 
+  def open_gate
+    Device.open_gate
+
+    render root_path
+  end
+
   private
 
   def set_device

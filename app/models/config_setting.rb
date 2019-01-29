@@ -4,7 +4,7 @@ class ConfigSetting < ApplicationRecord
 
   def self.retrieve(s, default='', cached = true)
     if cached
-      Rails.cache.fetch("ConfigSetting_#{s}") { ConfigSetting.by_title(s).first.setting }
+      Rails.cache.fetch("ConfigSetting_#{s}") { ConfigSetting.by_title(s).first&.setting }
     else
        ConfigSetting.by_title(s).first.setting
     end

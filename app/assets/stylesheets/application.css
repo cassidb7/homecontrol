@@ -14,4 +14,62 @@
  *= require_self
  *= require bootstrap.min.css
  *= require bootstrap2-toggle.css
+ *= require jquery-ui.css
+ *= require font-awesome
+ *= require ipInput.min.css
  */
+
+body{
+  background-image: url('raindrops.jpg');
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+#information-heading{
+  text-align: center;
+  background-color: #bfbfbf47;
+  border-radius: 5px;
+  border: 1px solid #c7c7c7;
+}
+
+#actionable-container{
+  margin-top: 30px;
+  background-color: #bfbfbf47;
+  border-radius: 5px;
+  border: 1px solid #c7c7c7;
+  padding: 20px;
+}
+
+#actionable-container #form-spacing{
+  margin-left: 10%;
+}
+ .col-md-4.panel.panel-default {
+   background-color: #bfbfbf47;
+   border-radius: 5px;
+   border: 1px solid #c7c7c7;
+   min-height: 75px;
+   margin: 10px;
+ }
+
+  .panel-font{
+    font-size: 30px;
+  }
+
+  .inline-container {
+    display: inline-block;
+  }
+
+  .panel-container.inline-container {
+    position: absolute;
+    top: 17px;
+    left: 20px;
+    font-size: 20px;
+  }
+
+.panel-container.inline-container {
+  color: white;
+}
+
+.panel-font.inline-container {
+  color: white;
+}

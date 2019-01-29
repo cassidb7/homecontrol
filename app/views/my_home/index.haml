@@ -1,0 +1,93 @@
+-# #metro-array{:style => "display: inline-block;"}
+-#   / Simple grid for the demo! None of these styles are required, thats just how I've styled my tiles
+-#   / The only important thing is class="metro-tile"
+-#   %div{:style => "width: 230px; height: 230px; float: left; transform-style: preserve-3d;"}
+-#     %a.metro-tile{:style => "cursor: pointer; width: 230px; height: 110px; display: block; background-color: deepskyblue; color: rgb(255, 255, 255); margin-bottom: 10px; transform-origin: 50% 50% 0px; transition: transform 0.08s ease 0s; outline: transparent solid 1px; -webkit-font-smoothing: antialiased; transform: perspective(800px) rotateX(0deg) rotateY(0deg) translateZ(-30px);"}
+-#       You can
+-#     %a.metro-tile{:style => "cursor: pointer; width: 230px; height: 110px; display: block; background-color: deepskyblue; color: rgb(255, 255, 255); transform-origin: 50% 50% 0px; transition: transform 0.08s ease 0s; outline: transparent solid 1px; -webkit-font-smoothing: antialiased;"}
+-#       put
+-#   %div{:style => "width: 230px; height: 230px; float: left; margin-left: 10px; transform-style: preserve-3d;"}
+-#     %a.metro-tile{:style => "cursor: pointer; width: 230px; height: 230px; display: block; background-color: deepskyblue; color: rgb(255, 255, 255); transform-origin: 50% 50% 0px; transition: transform 0.08s ease 0s; outline: transparent solid 1px; -webkit-font-smoothing: antialiased; transform: rotateX(0deg) rotateY(0deg) translateZ(0px);"}
+-#       anything you want
+-#   %div{:style => "width: 230px; height: 230px; float: left; margin-left: 10px; transform-style: preserve-3d;"}
+-#     %a.metro-tile{:style => "cursor: pointer; width: 230px; height: 110px; display: block; background-color: deepskyblue; color: rgb(255, 255, 255); margin-bottom: 10px; transform-origin: 50% 50% 0px; transition: transform 0.08s ease 0s; outline: transparent solid 1px; -webkit-font-smoothing: antialiased; transform: rotateX(0deg) rotateY(0deg) translateZ(0px);"}
+-#       in
+-#     %a.metro-tile{:style => "cursor: pointer; width: 110px; height: 110px; margin-right: 10px; display: block; float: left; background-color: deepskyblue; color: rgb(255, 255, 255); transform-origin: 50% 50% 0px; transition: transform 0.08s ease 0s; outline: transparent solid 1px; -webkit-font-smoothing: antialiased; transform: rotateX(0deg) rotateY(0deg) translateZ(0px);"}
+-#       these
+-#     %a.metro-tile{:style => "cursor: pointer; width: 110px; height: 110px; display: block; background-color: deepskyblue; float: right; color: rgb(255, 255, 255); transform-origin: 50% 50% 0px; transition: transform 0.08s ease 0s; outline: transparent solid 1px; -webkit-font-smoothing: antialiased; transform: rotateX(0deg) rotateY(0deg) translateZ(0px);"}
+-#       tiles
+
+
+#metro-array.col-md-12{:style => "display: inline-block;"}
+  %div{:style => "width: 230px; height: 230px; float: left; transform-style: preserve-3d;"}
+    =link_to lights_path do
+      .metro-tile{:style => "cursor: pointer; width: 230px; height: 110px; display: block; background-color: deepskyblue; color: rgb(255, 255, 255); margin-bottom: 10px; transform-origin: 50% 50% 0px; transition: transform 0.08s ease 0s; outline: transparent solid 1px; -webkit-font-smoothing: antialiased; transform: perspective(800px) rotateX(0deg) rotateY(0deg) translateZ(-30px);"}
+        Light
+
+    %a.metro-tile{:style => "cursor: pointer; width: 230px; height: 110px; display: block; background-color: deepskyblue; color: rgb(255, 255, 255); transform-origin: 50% 50% 0px; transition: transform 0.08s ease 0s; outline: transparent solid 1px; -webkit-font-smoothing: antialiased;"}
+      put
+
+  -# =link_to registrations_path, class: "btn btn-lg btn-default col-md-4 panel panel-default" do
+    .panel-parent
+      .panel-container.inline-container
+        =fa_icon "car"
+      .panel-font.inline-container My Cars
+
+  -# =link_to config_settings_path, class: "btn btn-lg btn-default col-md-4 panel panel-default" do
+    .panel-parent
+      .panel-container.inline-container
+        =fa_icon "cog"
+      .panel-font.inline-container Settings
+
+  -# =link_to open_gate_devices_path, class: "btn btn-lg btn-default col-md-4 panel panel-default" do
+    .panel-parent
+      .panel-container.inline-container
+        =fa_icon "times"
+      .panel-font.inline-container Open Gate
+
+
+
+
+
+
+
+
+-# .col-md-12
+-#   =link_to lights_path, class: "btn btn-lg btn-default col-md-4 panel panel-default " do
+-#     .panel-parent
+-#       .panel-container.inline-container
+-#         =fa_icon "twitter"
+-#       .panel-font.inline-container Light
+-#
+-#   =link_to registrations_path, class: "btn btn-lg btn-default col-md-4 panel panel-default" do
+-#     .panel-parent
+-#       .panel-container.inline-container
+-#         =fa_icon "car"
+-#       .panel-font.inline-container My Cars
+-#
+-#   =link_to config_settings_path, class: "btn btn-lg btn-default col-md-4 panel panel-default" do
+-#     .panel-parent
+-#       .panel-container.inline-container
+-#         =fa_icon "cog"
+-#       .panel-font.inline-container Settings
+-#
+-#   =link_to open_gate_devices_path, class: "btn btn-lg btn-default col-md-4 panel panel-default" do
+-#     .panel-parent
+-#       .panel-container.inline-container
+-#         =fa_icon "times"
+-#       .panel-font.inline-container Open Gate
+
+= javascript_include_tag "tileJs.min"
+= stylesheet_link_tag "style"
+
+:css
+  a {
+    font-style: initial;
+    font-family: sans-serif;
+    font-weight: 900;
+    font-size: 20px;
+  }
+
+  a:hover {
+    text-decoration: none;
+  }

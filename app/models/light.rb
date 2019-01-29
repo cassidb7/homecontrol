@@ -1,4 +1,5 @@
 class Light < ApplicationRecord
+  include Conditionable
   require 'uri'
   require 'net/http'
 
@@ -46,17 +47,26 @@ class Light < ApplicationRecord
   end
 
   def self.send_request
-    bridge_ip = ConfigSetting.retrieve('bridge_ip')
-    bridge_identity = ConfigSetting.retrieve('user_identifier')
+    bridge_ip = ConfigSetting.retrieve('bridge_ip', "")
+    bridge_identity = ConfigSetting.retrieve('user_identifier', "")
+
+    return if bridge_identity.blank? || bridge_ip.blank?
 
     url = URI("http://" + bridge_ip + "/api/" + bridge_identity + "/lights")
 
     http = Net::HTTP.new(url.host, url.port)
     request = Net::HTTP::Get.new(url)
-    response = http.request(request)
-    response =  JSON.parse(response.read_body) rescue nil
+    response = http.request(request) rescue false
+    response_read =  JSON.parse(response.read_body) #unless false?(response)
 
-    return response
+    #Light.remove_lights if false?(response)
+
+    return response_read
+  end
+
+  def self.remove_lights
+    Light.delete_all
+    puts "koala herro"
   end
 
   def self.send_request_to_light(request_body, light_unique_id, light_status)

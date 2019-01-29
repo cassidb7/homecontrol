@@ -1,5 +1,5 @@
 class Device < ApplicationRecord
-  require 'rpi_gpio'
+  # require 'rpi_gpio'
 
   has_secure_token :device_uid
 
@@ -33,7 +33,7 @@ class Device < ApplicationRecord
     end
   end
 
-  def blink(pin)
+  def self.blink(pin)
     puts("Button pressed")
     RPi::GPIO.set_high(pin)
     sleep(0.2)
