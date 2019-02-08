@@ -7,7 +7,6 @@
 
  body {
  	margin: 0px;
- 	background:#eee url(data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAADCAIAAADZSiLoAAAAHElEQVQIHWP48+fP9+/f////zwCkgBwQC4ghAACODRqkCkEF0QAAAABJRU5ErkJggg==) repeat;
  	font-family:'Lato', Helvetica, sans-serif;
  	line-height: 28px;
 	font-size: 16px;
@@ -92,5 +91,5 @@
  #downloads a {
  	color: #222;
  	font-weight: normal;
-	
+
  }

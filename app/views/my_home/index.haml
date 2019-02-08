@@ -1,31 +1,12 @@
--# #metro-array{:style => "display: inline-block;"}
--#   / Simple grid for the demo! None of these styles are required, thats just how I've styled my tiles
--#   / The only important thing is class="metro-tile"
+-# #metro-array.col-md-12{:style => "display: inline-block;"}
 -#   %div{:style => "width: 230px; height: 230px; float: left; transform-style: preserve-3d;"}
--#     %a.metro-tile{:style => "cursor: pointer; width: 230px; height: 110px; display: block; background-color: deepskyblue; color: rgb(255, 255, 255); margin-bottom: 10px; transform-origin: 50% 50% 0px; transition: transform 0.08s ease 0s; outline: transparent solid 1px; -webkit-font-smoothing: antialiased; transform: perspective(800px) rotateX(0deg) rotateY(0deg) translateZ(-30px);"}
--#       You can
--#     %a.metro-tile{:style => "cursor: pointer; width: 230px; height: 110px; display: block; background-color: deepskyblue; color: rgb(255, 255, 255); transform-origin: 50% 50% 0px; transition: transform 0.08s ease 0s; outline: transparent solid 1px; -webkit-font-smoothing: antialiased;"}
--#       put
--#   %div{:style => "width: 230px; height: 230px; float: left; margin-left: 10px; transform-style: preserve-3d;"}
--#     %a.metro-tile{:style => "cursor: pointer; width: 230px; height: 230px; display: block; background-color: deepskyblue; color: rgb(255, 255, 255); transform-origin: 50% 50% 0px; transition: transform 0.08s ease 0s; outline: transparent solid 1px; -webkit-font-smoothing: antialiased; transform: rotateX(0deg) rotateY(0deg) translateZ(0px);"}
--#       anything you want
--#   %div{:style => "width: 230px; height: 230px; float: left; margin-left: 10px; transform-style: preserve-3d;"}
--#     %a.metro-tile{:style => "cursor: pointer; width: 230px; height: 110px; display: block; background-color: deepskyblue; color: rgb(255, 255, 255); margin-bottom: 10px; transform-origin: 50% 50% 0px; transition: transform 0.08s ease 0s; outline: transparent solid 1px; -webkit-font-smoothing: antialiased; transform: rotateX(0deg) rotateY(0deg) translateZ(0px);"}
--#       in
--#     %a.metro-tile{:style => "cursor: pointer; width: 110px; height: 110px; margin-right: 10px; display: block; float: left; background-color: deepskyblue; color: rgb(255, 255, 255); transform-origin: 50% 50% 0px; transition: transform 0.08s ease 0s; outline: transparent solid 1px; -webkit-font-smoothing: antialiased; transform: rotateX(0deg) rotateY(0deg) translateZ(0px);"}
--#       these
--#     %a.metro-tile{:style => "cursor: pointer; width: 110px; height: 110px; display: block; background-color: deepskyblue; float: right; color: rgb(255, 255, 255); transform-origin: 50% 50% 0px; transition: transform 0.08s ease 0s; outline: transparent solid 1px; -webkit-font-smoothing: antialiased; transform: rotateX(0deg) rotateY(0deg) translateZ(0px);"}
--#       tiles
+-#     %a.metro-tile{href: '/lights', :style => "cursor: pointer; width: 230px; height: 110px; display: block; background-color: deepSkyBlue; color: #fff; margin-bottom: 10px;"}
+-#       Lights
+-#     %a.metro-tile{href: '/lights', :style => "cursor: pointer; width: 230px; height: 110px; display: block; background-color: deepSkyBlue; color: #fff; margin-bottom: 10px;"}
+-#       Lights
+-#     %a.metro-tile{href: '/lights', :style => "cursor: pointer; width: 230px; height: 110px; display: block; background-color: deepSkyBlue; color: #fff; margin-bottom: 10px;"}
+-#       Lights
 
-
-#metro-array.col-md-12{:style => "display: inline-block;"}
-  %div{:style => "width: 230px; height: 230px; float: left; transform-style: preserve-3d;"}
-    =link_to lights_path do
-      .metro-tile{:style => "cursor: pointer; width: 230px; height: 110px; display: block; background-color: deepskyblue; color: rgb(255, 255, 255); margin-bottom: 10px; transform-origin: 50% 50% 0px; transition: transform 0.08s ease 0s; outline: transparent solid 1px; -webkit-font-smoothing: antialiased; transform: perspective(800px) rotateX(0deg) rotateY(0deg) translateZ(-30px);"}
-        Light
-
-    %a.metro-tile{:style => "cursor: pointer; width: 230px; height: 110px; display: block; background-color: deepskyblue; color: rgb(255, 255, 255); transform-origin: 50% 50% 0px; transition: transform 0.08s ease 0s; outline: transparent solid 1px; -webkit-font-smoothing: antialiased;"}
-      put
 
   -# =link_to registrations_path, class: "btn btn-lg btn-default col-md-4 panel panel-default" do
     .panel-parent
@@ -47,7 +28,26 @@
 
 
 
+#metro-array.col-md-12{:style => "display: inline-block;"}
+  / Simple grid for the demo! None of these styles are required, thats just how I've styled my tiles
+  / The only important thing is class="metro-tile"
+  %div.col-md-3.pull-left
+    %a.metro-tile{href: '/lights', :style => "cursor: pointer; width: 230px; height: 110px; display: block; background-color: deepSkyBlue; color: #fff; margin-bottom: 10px;"}
+      Lights
+      .fa.fa-4x.fa-lightbulb
 
+    %a.metro-tile{href: '/registrations',:style => "cursor: pointer; width: 230px; height: 110px; display: block; background-color: deepSkyBlue; color: #fff;"}
+      Registrations
+  %div.col-md-3.pull-left
+    %a.metro-tile{href: '/devices/open_gate',:style => "cursor: pointer; width: 230px; height: 230px; display: block; background-color: deepSkyBlue; color: #fff"}
+      Open Gate
+  %div.col-md-3.pull-left
+    %a.metro-tile{href: '/devices',:style => "cursor: pointer; width: 230px; height: 110px; display: block; background-color: deepSkyBlue; color: #fff; margin-bottom: 10px;"}
+      Devices
+    %a.metro-tile{href: '/config_settings',:style => "cursor: pointer; width: 110px; height: 110px; margin-right: 10px; display: block; float: left; background-color: deepSkyBlue; color: #fff;"}
+      Settings
+    %a.metro-tile{:style => "cursor: pointer; width: 110px; height: 110px; display: block; background-color: deepSkyBlue; float: right; color: #fff;"}
+      tiles
 
 
 
@@ -77,7 +77,7 @@
 -#         =fa_icon "times"
 -#       .panel-font.inline-container Open Gate
 
-= javascript_include_tag "tileJs.min"
+= javascript_include_tag "tileJs"
 = stylesheet_link_tag "style"
 
 :css
